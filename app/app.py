@@ -1,7 +1,6 @@
 """Flask application with OpenTelemetry instrumentation."""
 
 import time
-import random
 from flask import Flask, jsonify, request
 from opentelemetry import trace
 from opentelemetry.sdk.trace import TracerProvider

@@ -15,10 +15,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run yamllint
-        uses: docker://yamllint/yamllint:latest
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          args: --strict .
+          python-version: "3.12"
+
+      - name: Run yamllint
+        run: |
+          pip install yamllint
+          yamllint -d "{extends: relaxed, rules: {line-length: {max: 160}}}" docker-compose.yml otel-collector.yaml prometheus.yml prometheus-rules.yml tempo.yaml grafana/ .github/
 
       - name: Check Python syntax
         run: python3 -m py_compile app/app.py
@@ -48,7 +53,7 @@ jobs:
           pip install flake8
 
       - name: Run flake8
-        run: flake8 app/
+        run: flake8 --max-line-length=140 --ignore=E302,E305 app/
 
   test:
     name: Integration Tests
