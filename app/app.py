@@ -22,7 +22,10 @@ trace.get_tracer_provider().add_span_processor(BatchSpanProcessor(otlp_exporter)
 FlaskInstrumentor().instrument_app(app)
 
 # Metrics setup
-metric_reader = PeriodicExportingMetricReader(OTLPMetricExporter(endpoint="otel-collector:4317", insecure=True), export_interval_millis=5000)
+metric_reader = PeriodicExportingMetricReader(
+    OTLPMetricExporter(endpoint="otel-collector:4317", insecure=True),
+    export_interval_millis=5000,
+)
 meter_provider = MeterProvider(metric_readers=[metric_reader])
 set_meter_provider(meter_provider)
 
