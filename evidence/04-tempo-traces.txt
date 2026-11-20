@@ -1,0 +1,8 @@
+=== Tempo /api/search ===
+{
+    "traces": [],
+    "metrics": {
+        "completedJobs": 1,
+        "totalJobs": 1
+    }
+}

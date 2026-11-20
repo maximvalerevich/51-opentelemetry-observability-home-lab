@@ -1,0 +1,47 @@
+=== Validate Docker Compose Configuration ===
+
+Checking docker-compose.yml...
+✓ docker-compose.yml: valid YAML
+Checking otel-collector.yaml...
+✓ otel-collector.yaml: valid YAML
+Checking prometheus.yml...
+✓ prometheus.yml: valid YAML
+Checking prometheus-rules.yml...
+✓ prometheus-rules.yml: valid YAML
+Checking tempo.yaml...
+✓ tempo.yaml: valid YAML
+Checking grafana provisioning files...
+✓ datasources.yaml: valid YAML
+✓ dashboards.yaml: valid YAML
+✓ red-slo-dashboard.json: valid JSON
+
+=== Validate Docker Build ===
+Checking Dockerfile syntax...
+✓ Dockerfile: basic syntax OK
+
+=== Validate Python Application ===
+Checking Python syntax...
+✓ app/app.py: valid Python
+
+=== Validate Configuration Files ===
+Checking required files exist...
+✓ .gitignore
+✓ app/requirements.txt
+✓ app/Dockerfile
+✓ app/app.py
+✓ otel-collector.yaml
+✓ prometheus.yml
+✓ prometheus-rules.yml
+✓ tempo.yaml
+✓ docker-compose.yml
+✓ Makefile
+
+=== Validate Grafana Provisioning ===
+✓ grafana/provisioning/datasources/datasources.yaml
+✓ grafana/provisioning/dashboards/dashboards.yaml
+✓ grafana/provisioning/dashboards/red-slo-dashboard.json
+
+=== Validation Complete ===
+
+All checks passed!
+Validation PASSED

@@ -1,0 +1,92 @@
+=== docker compose ps ===
+NAME                                                       IMAGE                                          COMMAND                  SERVICE          CREATED          STATUS          PORTS
+51-opentelemetry-observability-home-lab-app-1              51-opentelemetry-observability-home-lab-app    "python app.py"          app              29 seconds ago   Up 27 seconds   0.0.0.0:8080->8080/tcp, [::]:8080->8080/tcp
+51-opentelemetry-observability-home-lab-grafana-1          grafana/grafana:11.3.0                         "/run.sh"                grafana          29 seconds ago   Up 27 seconds   0.0.0.0:3000->3000/tcp, [::]:3000->3000/tcp
+51-opentelemetry-observability-home-lab-otel-collector-1   otel/opentelemetry-collector-contrib:0.107.0   "/otelcol-contrib --…"   otel-collector   29 seconds ago   Up 28 seconds   0.0.0.0:4317-4318->4317-4318/tcp, [::]:4317-4318->4317-4318/tcp, 0.0.0.0:8889->8889/tcp, [::]:8889->8889/tcp
+51-opentelemetry-observability-home-lab-prometheus-1       prom/prometheus:v2.54.1                        "/bin/prometheus --c…"   prometheus       29 seconds ago   Up 28 seconds   0.0.0.0:9090->9090/tcp, [::]:9090->9090/tcp
+51-opentelemetry-observability-home-lab-tempo-1            grafana/tempo:2.8.0                            "/tempo -config.file…"   tempo            29 seconds ago   Up 29 seconds   0.0.0.0:3200->3200/tcp, [::]:3200->3200/tcp
+
+=== Grafana /api/health ===
+{
+  "database": "ok",
+  "version": "11.3.0",
+  "commit": "d9455ff7db73b694db7d412e49a68bec767f2b5a"
+}
+=== Grafana /api/datasources ===
+[
+    {
+        "id": 1,
+        "uid": "PBFA97CFB590B2093",
+        "orgId": 1,
+        "name": "Prometheus",
+        "type": "prometheus",
+        "typeName": "Prometheus",
+        "typeLogoUrl": "public/app/plugins/datasource/prometheus/img/prometheus_logo.svg",
+        "access": "proxy",
+        "url": "http://prometheus:9090",
+        "user": "",
+        "database": "",
+        "basicAuth": false,
+        "isDefault": true,
+        "jsonData": {
+            "timeInterval": "5s"
+        },
+        "readOnly": true
+    },
+    {
+        "id": 2,
+        "uid": "P214B5B846CF3925F",
+        "orgId": 1,
+        "name": "Tempo",
+        "type": "tempo",
+        "typeName": "Tempo",
+        "typeLogoUrl": "public/app/plugins/datasource/tempo/img/tempo_logo.svg",
+        "access": "proxy",
+        "url": "http://tempo:3200",
+        "user": "",
+        "database": "",
+        "basicAuth": false,
+        "isDefault": false,
+        "jsonData": {
+            "httpMethod": "GET",
+            "refreshInterval": "5s"
+        },
+        "readOnly": true
+    }
+]
+
+=== Prometheus /api/v1/targets ===
+{
+    "status": "success",
+    "data": {
+        "activeTargets": [
+            {
+                "discoveredLabels": {
+                    "__address__": "otel-collector:8889",
+                    "__metrics_path__": "/metrics",
+                    "__scheme__": "http",
+                    "__scrape_interval__": "5s",
+                    "__scrape_timeout__": "5s",
+                    "job": "otel-collector"
+                },
+                "labels": {
+                    "instance": "otel-collector:8889",
+                    "job": "otel-collector"
+                },
+                "scrapePool": "otel-collector",
+                "scrapeUrl": "http://otel-collector:8889/metrics",
+                "globalUrl": "http://otel-collector:8889/metrics",
+                "lastError": "",
+                "lastScrape": "2026-11-20T07:30:07.563880522Z",
+                "lastScrapeDuration": 0.000829665,
+                "health": "up",
+                "scrapeInterval": "5s",
+                "scrapeTimeout": "5s"
+            }
+        ],
+        "droppedTargets": [],
+        "droppedTargetCounts": {
+            "otel-collector": 0
+        }
+    }
+}

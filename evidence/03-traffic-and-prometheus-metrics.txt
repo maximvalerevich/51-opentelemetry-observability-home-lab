@@ -1,0 +1,114 @@
+=== Traffic generation ===
+GET /healthz: {"status":"healthy"}
+GET /: {"message":"Welcome to the observability demo"}
+GET /slow: {"message":"Slow response complete"}
+GET /error: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+ HTTP=500
+GET /chain: {"message":"Chain complete","result":"step1->step2->step3"}
+GET /healthz: {"status":"healthy"}
+GET /: {"message":"Welcome to the observability demo"}
+GET /slow: {"message":"Slow response complete"}
+GET /error: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+ HTTP=500
+GET /chain: {"message":"Chain complete","result":"step1->step2->step3"}
+GET /healthz: {"status":"healthy"}
+GET /: {"message":"Welcome to the observability demo"}
+GET /slow: {"message":"Slow response complete"}
+GET /error: <!doctype html>
+<html lang=en>
+<title>500 Internal Server Error</title>
+<h1>Internal Server Error</h1>
+<p>The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application.</p>
+ HTTP=500
+GET /chain: {"message":"Chain complete","result":"step1->step2->step3"}
+
+Waiting 12s for OTel batching & Prometheus scrape...
+=== Prometheus OTel metrics ===
+{
+    "status": "success",
+    "data": {
+        "resultType": "vector",
+        "result": [
+            {
+                "metric": {
+                    "__name__": "up",
+                    "instance": "otel-collector:8889",
+                    "job": "otel-collector"
+                },
+                "value": [
+                    1795159829.473,
+                    "1"
+                ]
+            },
+            {
+                "metric": {
+                    "__name__": "http_request_duration_seconds_bucket",
+                    "exported_job": "app",
+                    "instance": "otel-collector:8889",
+                    "job": "otel-collector",
+                    "le": "0",
+                    "method": "GET",
+                    "path": "/",
+                    "service": "otel-collector",
+                    "status": "200"
+                },
+                "value": [
+                    1795159829.473,
+                    "0"
+                ]
+            },
+            {
+                "metric": {
+                    "__name__": "http_request_duration_seconds_bucket",
+                    "exported_job": "app",
+                    "instance": "otel-collector:8889",
+                    "job": "otel-collector",
+                    "le": "5",
+                    "method": "GET",
+                    "path": "/",
+                    "service": "otel-collector",
+                    "status": "200"
+                },
+                "value": [
+                    1795159829.473,
+                    "3"
+                ]
+            },
+            {
+                "metric": {
+                    "__name__": "http_request_duration_seconds_bucket",
+                    "exported_job": "app",
+                    "instance": "otel-collector:8889",
+                    "job": "otel-collector",
+                    "le": "10",
+                    "method": "GET",
+                    "path": "/",
+                    "service": "otel-collector",
+                    "status": "200"
+                },
+                "value": [
+                    1795159829.473,
+                    "3"
+                ]
+            },
+            {
+                "metric": {
+                    "__name__": "http_request_duration_seconds_bucket",
+                    "exported_job": "app",
+                    "instance": "otel-collector:8889",
+                    "job": "otel-collector",
+                    "le": "25",
+                    "method": "GET",
+                    "path": "/",
+                    "service": "otel-collector",
+                    "status": "200"
+                },
+                "value": [
